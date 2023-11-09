@@ -237,11 +237,12 @@ namespace FullCRUD
                 using (StreamWriter writer = new StreamWriter(filePath))
                 {
                     // Write the column headers
-                    writer.WriteLine("Username,Phone,Email");
+                    writer.WriteLine("id,Username,Phone,Email");
 
                     // Write the data
                     while (drUser.Read())
                     {
+                        writer.Write(drUser["id"] + ",");
                         writer.Write(drUser["user_name"].ToString() + ",");
                         writer.Write(drUser["phone"].ToString() + ",");
                         writer.Write(drUser["email"].ToString());
