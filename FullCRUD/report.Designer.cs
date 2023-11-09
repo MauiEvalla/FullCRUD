@@ -33,6 +33,8 @@
             this.crystalReportViewer1 = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.customerReport1 = new FullCRUD.customerReport();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.btnCharts = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnShow
@@ -58,7 +60,7 @@
             this.crystalReportViewer1.Location = new System.Drawing.Point(0, 0);
             this.crystalReportViewer1.Name = "crystalReportViewer1";
             this.crystalReportViewer1.ReportSource = this.customerReport1;
-            this.crystalReportViewer1.Size = new System.Drawing.Size(800, 450);
+            this.crystalReportViewer1.Size = new System.Drawing.Size(1258, 450);
             this.crystalReportViewer1.TabIndex = 0;
             // 
             // label1
@@ -70,11 +72,33 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Customer Reports";
             // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(54, 111);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(75, 23);
+            this.btnExport.TabIndex = 3;
+            this.btnExport.Text = "Export";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // btnCharts
+            // 
+            this.btnCharts.Location = new System.Drawing.Point(54, 140);
+            this.btnCharts.Name = "btnCharts";
+            this.btnCharts.Size = new System.Drawing.Size(75, 23);
+            this.btnCharts.TabIndex = 4;
+            this.btnCharts.Text = "Chart";
+            this.btnCharts.UseVisualStyleBackColor = true;
+            this.btnCharts.Click += new System.EventHandler(this.btnCharts_Click);
+            // 
             // report
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1258, 450);
+            this.Controls.Add(this.btnCharts);
+            this.Controls.Add(this.btnExport);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnShow);
             this.Controls.Add(this.crystalReportViewer1);
@@ -92,5 +116,7 @@
         private CrystalDecisions.Shared.Interop.CrystalOpenFileDialog crystalOpenFileDialog1;
         private customerReport customerReport1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnCharts;
     }
 }

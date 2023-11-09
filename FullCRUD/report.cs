@@ -13,6 +13,11 @@ using System.Configuration;
 using BusinessLogic;
 using DataAccess;
 using BusinessObject;
+using CrystalDecisions.Shared;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+
 
 namespace FullCRUD
 {
@@ -28,15 +33,65 @@ namespace FullCRUD
             InitializeComponent();
         }
 
- 
-        private void btnShow_Click(object sender, EventArgs e)
+
+       
+private void btnShow_Click(object sender, EventArgs e)
         {
-            dataTable.Clear ();
-            customerReport report = new customerReport();
+            // Retrieve data into the dataTable
+            dataTable.Clear();
             dataTable = ReportBL.viewData();
+
+            // Create a new instance of the report
+            customerReport report = new customerReport();
+
+            // Set the DataTable as the data source for the report
             report.Database.Tables["customers"].SetDataSource(dataTable);
-            crystalReportViewer1.ReportSource = null;
+
+            // Set the report source for the CrystalReportViewer
             crystalReportViewer1.ReportSource = report;
+
+            // Refresh the report data
+            report.Refresh();
+
+            // Export the report to PDF
+            ExportOptions exportOptions = new ExportOptions();
+            exportOptions.ExportFormatType = ExportFormatType.PortableDocFormat; // PDF format
+            exportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+            exportOptions.DestinationOptions = new DiskFileDestinationOptions
+            {
+                DiskFileName = "C:\\Users\\Omen\\Desktop\\hi\\customers.pdf" // Specify the path and file name for the exported PDF file.
+            };
+
+            report.ExportToDisk(ExportFormatType.PortableDocFormat, "C:\\Users\\Omen\\Desktop\\hi\\customers.pdf");
+
+            MessageBox.Show("Report exported to PDF successfully.");
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            ReportDocument reportDocument = new ReportDocument();
+            reportDocument.Load("C:\\Users\\Omen\\source\\repos\\FullCRUD\\FullCRUD\\customerReport.rpt");
+            reportDocument.SetDatabaseLogon("root", "", "users", "customers");
+
+
+
+
+            ExportOptions exportOptions = new ExportOptions();
+            exportOptions.ExportFormatType = ExportFormatType.PortableDocFormat; // PDF format
+            exportOptions.ExportDestinationType = ExportDestinationType.DiskFile;
+            exportOptions.DestinationOptions = new DiskFileDestinationOptions
+            {
+                DiskFileName = "C:\\Users\\Omen\\Desktop\\hi\\customers.pdf" // Specify the path and file name for the exported PDF file.
+            };
+            reportDocument.Export(exportOptions);
+
+            MessageBox.Show("Report exported to PDF successfully.");
+
+        }
+
+        private void btnCharts_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
